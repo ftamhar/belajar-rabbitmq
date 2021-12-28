@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  rabbitmq3:
+    container_name: rabbitmq3
+    image: rabbitmq:3.9.11-management-alpine
+    ports:
+      - 15672:15672
+      - 5672:5672
+  redis:
+    container_name: redis
+    image: redis:alpine3.15
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+
+  redis-client:
+    container_name: redis-client
+    image: redis:alpine3.15
